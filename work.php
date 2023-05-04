@@ -31,15 +31,17 @@
         <div class="logo-text">第二組</div>
       </a>
       <nav role="navigation" class="nav-menu w-nav-menu">
-      <a href="index.html" aria-current="page"   class="nav-link w-nav-link  w--current" >首頁</a>
-        <a href="work.php"  class="nav-link w-nav-link ">共病性查詢</a>
-        <a href="icd1icd2.php"   class="nav-link w-nav-link ">ICD共病性</a>
-        <a href="project.html"  class="nav-link w-nav-link ">疾病趨勢圖</a>
-        <a href="icd.html" class="nav-link w-nav-link">查詢icd中文</a>
+        <a href="index.html" aria-current="page" class="nav-link w-nav-link  w--current">首頁</a>
+        <a href="work.php" class="nav-link w-nav-link ">共病性查詢</a>
+        <a href="icd1icd2.php" class="nav-link w-nav-link ">ICD共病性</a>
+        <a href="icd_code.php" class="nav-link w-nav-link">ICD對照查詢</a>
+        <a href="project.html" class="nav-link w-nav-link ">疾病趨勢圖</a>
         <a href="contact.html" class="nav-link w-nav-link">關於我們</a>
-        <a href="" aria-current="page" class="nav-link social-icons w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block w-nav-link"><img src="images/icons8-privacy-64-1.png" width="25" alt=""></a>
+        <a href="" aria-current="page"
+          class="nav-link social-icons w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block w-nav-link"><img
+            src="images/icons8-privacy-64-1.png" width="25" alt=""></a>
       </nav>
-      
+
       <div class="menu-button w-nav-button">
         <div class="menu-icon w-icon-nav-menu"></div>
       </div>
@@ -82,7 +84,8 @@
               onsubmit="return validateForm()"><label for="id">身分證字號</label>
               <input type="text" class="w-input" maxlength="256" name="id" data-name="id" placeholder="" id="id">
 
-              </select><input type="submit" value="查詢" name="submit" data-wait="Please wait..." class="w-button">
+              </select>
+              <input type="submit" value="查詢" name="submit" data-wait="Please wait..." class="w-button">
 
             </form>
 
@@ -93,7 +96,7 @@
               $id = $_POST['id'];
 
               // 資料庫連線
-              $conn = mysqli_connect("localhost", "root", "renee29071626", "icd_test");
+              $conn = mysqli_connect("localhost", "root", "12345678", "icd_test");
               if (!$conn) {
                 die("連線失敗: " . mysqli_connect_error());
               }
@@ -123,6 +126,75 @@
                 echo "該病患尚未被診斷任何疾病";
               }
               mysqli_close($conn);
+            }
+            ?>
+          </div>
+
+
+          <div class="result-container">
+            <?php
+            if (isset($_POST['submit'])) {
+              // 取得使用者輸入的身分證字號
+              $id = $_POST['id'];
+
+              // 資料庫連線
+              $conn = mysqli_connect("localhost", "root", "12345678", "icd_test");
+              if (!$conn) {
+                die("連線失敗: " . mysqli_connect_error());
+              }
+
+              // 在表格tester搜尋相同身分證字號的ICD編碼
+              $sql = "SELECT * FROM tester WHERE CHARTID = '$id'";
+              $result = mysqli_query($conn, $sql);
+
+              if (mysqli_num_rows($result) > 0) {
+                // 找到了相同身分證字號的ICD編碼，逐一進行第二次搜尋
+                $icd_codes = array();
+                $diagnosed_icd_codes = array(); // 存儲已被診斷的ICD編碼
+                while ($row = mysqli_fetch_assoc($result)) {
+                  $icd = $row["ICD9"];
+                  $diagnosed_icd_codes[] = $icd; // 將已被診斷的ICD編碼存儲到陣列中
+                  // 在表格icd_rr中搜尋該ICD編碼的共病性RR值，但不包含已被診斷的疾病
+                  $sql2 = "SELECT * FROM icd_rr WHERE ICD2 = '$icd' AND ICD1 NOT IN ('" . implode("','", $diagnosed_icd_codes) . "') ORDER BY RR DESC LIMIT 3";
+                  $result2 = mysqli_query($conn, $sql2);
+
+                  // 將結果存儲到陣列中
+                  while ($row2 = $result2->fetch_assoc()) {
+                    $icd_code = $row2["ICD1"];
+                    $rr = $row2["RR"];
+                    if (isset($icd_codes[$icd_code])) {
+                      // 如果該ICD碼已經存在於$icd_codes中，取出目前的RR值比較
+                      if ($icd_codes[$icd_code] < $rr) {
+                        $icd_codes[$icd_code] = $rr; // 更新RR值
+                      }
+                    } else {
+                      // 如果該ICD碼不存在於$icd_codes中，直接加入
+                      $icd_codes[$icd_code] = $rr;
+                    }
+                  }
+                }
+
+                // 顯示診斷結果
+                echo '<div class="result-container">';
+                echo '<h2>診斷結果：</h2>';
+                if (count($icd_codes) > 0) {
+                  arsort($icd_codes); // 將陣列按照 $rr 值由大到小排序
+                  echo "<ul>";
+                  foreach ($icd_codes as $icd => $rr) {
+                    $icd_name = mysqli_query($conn, "SELECT ICDname FROM icd9toicd10 WHERE ICD9code = '$icd'");
+                    $name = "";
+                    if (mysqli_num_rows($icd_name) > 0) {
+                      $row_name = mysqli_fetch_assoc($icd_name);
+                      $name = $row_name["ICDname"];
+                    }
+                    echo "<li> ICD: $icd, $name, RR: $rr</li>";
+                  }
+                  echo "</ul>";
+                } else {
+                  $conn->close();
+                  echo "該病患查無相關共病性資料";
+                }
+              }
             }
             ?>
           </div>
