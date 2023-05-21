@@ -5119,34 +5119,84 @@ Webflow.define('slider', module.exports = function ($, _) {
 /******/ ]);
 
 
-    // 首先獲取左箭頭和右箭頭的DOM元素
-    const leftArrow = document.getElementById('left-arrow');
-    const rightArrow = document.getElementById('right-arrow');
+
+    // 按鍵功能
+
+    window.onload = function () {
+      let slideIndex = 1;
+      showSlide(slideIndex);
     
-    // 獲取顯示區塊的DOM元素
-    const firstBlock = document.querySelector('.w-row > .w-col:first-child');
-    const secondBlock = document.querySelector('.w-row > .w-col:nth-child(2)');
-    const thirdBlock = document.querySelector('#pageTwo:first-child');
-    const forthBlock = document.querySelector('.w-row > .w-col:last-child');
+      let prev = document.getElementById("prev");
+      prev.addEventListener("click", divideSlides, false);
     
-    // 隱藏第三、四個區塊
-    thirdBlock.style.display = 'none';
-    forthBlock.style.display = 'none';
+      let next = document.getElementById("next");
+      next.addEventListener("click", plusSlides, false);
     
-    // 當左箭頭被點擊時，顯示第一、二個區塊，隱藏第三、四個區塊
-    leftArrow.addEventListener('click', () => {
-      firstBlock.style.display = 'block';
-      secondBlock.style.display = 'block';
-      thirdBlock.style.display = 'none';
-      forthBlock.style.display = 'none';
-      console.log(222);
+      const selectdot = document.querySelectorAll(".dot");
+      for (let i = 0; i < selectdot.length; i++) {
+        selectdot[i].addEventListener("click", function (e) {
+          showSlide((slideIndex = i + 1));
+        });
+      }
+    
+      function plusSlides() {
+        showSlide((slideIndex += 1));
+
+      }
+    
+      function divideSlides() {
+        showSlide((slideIndex -= 1));
+
+      }
+      function showSlide(num) {
+        let slides = document.getElementsByClassName("w-col ");
+        let dots = document.getElementsByClassName("dot");
+        if (num > slides.length) {
+          slideIndex = 1;
+        }
+    
+        if (num < 1) {
+          slideIndex = slides.length;
+        }
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (let i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace("active", "");
+        }
+    
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+      }
+    };
+
+
+    //隱私權視窗
+    document.getElementById("openPopup").addEventListener("click", function(event) {
+      event.preventDefault();
+      document.getElementById("popupContainer").style.display = "block";
     });
     
-    // 當右箭頭被點擊時，顯示第三、四個區塊，隱藏第一、二個區塊
-    rightArrow.addEventListener('click', () => {
-      firstBlock.style.display = 'none';
-      secondBlock.style.display = 'none';
-      thirdBlock.style.display = 'block';
-      forthBlock.style.display = 'block';
-      console.log(111);
+    document.getElementById("closePopup").addEventListener("click", function() {
+      document.getElementById("popupContainer").style.display = "none";
     });
+    
+    document.getElementById("confirmButton").addEventListener("click", function() {
+      var acceptCheckbox = document.getElementById("acceptCheckbox");
+      if (acceptCheckbox.checked) {
+        document.getElementById("popupContainer").style.display = "none";
+        // 执行接受隐私权政策后的操作
+      } else {
+        alert("请先勾选接受隐私权政策。");
+      }
+    });
+
+    //取用cookie
+    document.cookie = "cookieName=cookieValue; expires=" + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString() + "; path=/";
+    
+    
+    
+
+
+    
+

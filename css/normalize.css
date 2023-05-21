@@ -100,6 +100,7 @@ margin: 0.67em 0;：設定上下邊距為默認字體大小的 0.67 倍，左右
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
+  padding-top: 1erm;
 }
 
 /* 當 HTML 中有 <mark> 標籤時，將其背景色設為黃色(#ff0)，文字顏色設為黑色(#000)。
@@ -190,7 +191,7 @@ select,
 textarea {
   color: inherit;
   font: inherit;
-  margin: 0;
+  margin-bottom: 10px;
 }
 
 /* 它設置了按鈕元素的溢位（overflow）屬性為可見（visible）。這意味著，
@@ -316,3 +317,44 @@ td,
 th {
   padding: 0;
 }
+
+/* 隱私權 */
+/* 標題樣式 */
+h1 {
+	color: #333;
+	font-size: 28px;
+	text-align: center;
+	margin-bottom: 20px;
+  }
+  
+  h2 {
+	color: #555;
+	font-size: 24px;
+	margin-top: 30px;
+  }
+  
+  /* 段落樣式 */
+  p {
+	color: #777;
+	line-height: 1.6;
+  }
+  
+  /* 頁面容器樣式 */
+  body {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	font-family: Arial, sans-serif;
+  }
+  
+  /* 頁面背景和邊框樣式 */
+  html,
+  body {
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+  }
+  
+  /* 頁面容器與文本之間的間距 */
+  body > * {
+	margin-bottom: 20px;
+  }
