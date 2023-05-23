@@ -5171,25 +5171,7 @@ Webflow.define('slider', module.exports = function ($, _) {
     };
 
 
-    //隱私權視窗
-    document.getElementById("openPopup").addEventListener("click", function(event) {
-      event.preventDefault();
-      document.getElementById("popupContainer").style.display = "block";
-    });
-    
-    document.getElementById("closePopup").addEventListener("click", function() {
-      document.getElementById("popupContainer").style.display = "none";
-    });
-    
-    document.getElementById("confirmButton").addEventListener("click", function() {
-      var acceptCheckbox = document.getElementById("acceptCheckbox");
-      if (acceptCheckbox.checked) {
-        document.getElementById("popupContainer").style.display = "none";
-        // 执行接受隐私权政策后的操作
-      } else {
-        alert("请先勾选接受隐私权政策。");
-      }
-    });
+
 
     //取用cookie
     document.cookie = "cookieName=cookieValue; expires=" + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString() + "; path=/";

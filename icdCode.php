@@ -10,8 +10,9 @@
   <meta content="這是一個查詢疾病共病性的平台" name="description">
   <!-- width=device-width 表示設定網頁寬度與螢幕裝置的寬度相同，而 initial-scale=1 則表示初始縮放比例為 1，也就是不進行縮放。 -->
   <meta content="width=device-width, initial-scale=1" name="viewport">
-
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
+
+  
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/comorbiditymiia.webflow.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -39,7 +40,6 @@
         <a href="dataChart.php" class="nav-link w-nav-link">疾病趨勢圖</a>
         <a href="contact.html" class="nav-link w-nav-link">關於我們</a>
         <a href="privacy.html" aria-current="page" class="nav-link social-icons w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block w-nav-link"><img src="images/icons8-privacy-64-1.png" width="25" alt=""></a>
-
       </nav>
 
       <div class="menu-button w-nav-button">
@@ -54,10 +54,12 @@
       <div class="subheading">輸入兩個不同的疾病之ICD進行查詢</div>
     </div>
   </div>
+  
+
   <div class="section wf-section">
     <div class="w-container">
       <div class="w-row">
-        <div class="w-col w-col-4">
+        <div class="w-col-other w-col-4">
           <div class="number">enter</div>
           <h2 class="project-title">輸入疾病ICD</h2>
           <div class="w-form">
@@ -173,12 +175,13 @@
         </div>
         <div class="project-column w-col-other w-col-8" style="padding-left:80px ">
           <img src="2.png" width="100%" >
-            </div>
-      </div>
-      </div>
+        </div>
+      </div
+     
 
     </div>
   </div>
+
 
   <div class="section lightgrey wf-section">
     <div class="w-container"></div>
@@ -192,6 +195,7 @@
         </div>
         <div class="w-col1 w-col-4">
           <a href="contact.html" class="button beige footer">網站資訊與我們的聯絡</a>
+          </div>
         </div>
         <div class="w-col1 w-col-4">
           <div class="footer-text address">2022.12</div>
@@ -200,6 +204,7 @@
      
     </div>
   </div>
+          
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63845ae083c0cd91137a04f3"
     type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
     crossorigin="anonymous"></script>
@@ -210,4 +215,3 @@
 </body>
 
 </html>
-</body>

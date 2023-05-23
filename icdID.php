@@ -10,6 +10,7 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/comorbiditymiia.webflow.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -79,7 +80,7 @@
 
           <div class="w-form">
             <form id="wf-form-icd-from" name="myForm" data-name="icd from" method="POST" action=" "
-              onsubmit="return validateForm()"><label for="id">身分證字號</label>
+              onsubmit="return validateForm()"><label for="id">病歷號碼</label>
               <input type="text" class="w-input" maxlength="256" name="id" data-name="id" placeholder="" id="id">
 
               </select>

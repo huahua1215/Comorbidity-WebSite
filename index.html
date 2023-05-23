@@ -7,6 +7,7 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/comorbiditymiia.webflow.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -14,6 +15,48 @@
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
+  <style>
+    /* 影片的樣式設定 */
+    .video-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 900px;
+      height: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .video-container img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+ 
+
+    }
+
+    .video-container:hover video {
+      opacity: 1;
+    }
+
+    .video-container:hover img {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
@@ -59,7 +102,7 @@
           <div class="number">001</div>
           <div class="process-titles">共病性查詢</div>
           <div class="icon-wrapper"><img src="共病性查詢.png" width="120" alt=""></div>
-          <p class="paragraph-5">輸入病人的「身分證字號」，查看已得之疾病及該疾病和其他疾病的共病性。</p>
+          <p class="paragraph-5">輸入病人的「病歷號碼」，查看病人已得之疾病及該疾病和其他疾病的共病性。</p>
 
         </div>
         <div class="w-col  fades"  >
@@ -140,24 +183,17 @@
         <div class="small-title">網站導覽</div>
         <div class="horizontal-bar lightgrey"></div>
       </div>
-      <div data-delay="4000" data-animation="slide" class="testimonials-slider w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
-        <div style="color: hsla(0, 0%, 0%, 0.81); font-size: 20px; font-style: italic;font-weight: 400;line-height: 70px;">網站之相關介紹</div>
-   
-        <div class="help-section">
+
           
           <div class="help-container">
-            <a href="guide-1.html" target="_blank">
-              <button class="help-button">共病性查詢</button>
-            </a>
-            <a href="path/to/other/page.html" target="_blank">
-              <button class="help-button">ICD共病性</button>
-            </a>
-            <a href="path/to/other/page.html" target="_blank">
-              <button class="help-button">ICD對照查詢</button>
-            </a>
-            <a href="path/to/other/page.html" target="_blank">
-              <button class="help-button">疾病趨勢圖</button>
-            </a>
+            <div class="video-container">
+              <video src="測試demo.mp4" id="video" controls></video>
+              <img src="team 2-2.png" alt="Preview Image">
+            </div>
+            <!-- <a href="guide-1.html" target="_blank">
+              <button class="help-button">點我查看網站之相關介紹</button>
+            </a> -->
+            
            
           </div>
           
