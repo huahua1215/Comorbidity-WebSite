@@ -210,11 +210,11 @@
       </div>
       </div>
     </div>
-  </div>
-  <div class="section lightgrey wf-section">
+  
+   <div class="section lightgrey wf-section">
     <div class="w-container"></div>
-  </div>
-  <div class="section footer wf-section">
+   </div>
+   <div class="section footer wf-section">
     <div class="w-container">
       <div class="w-row">
         <div class="w-col1 w-col-4"><img src="images/logo.png" width="20" alt="" class="stone-logo footer">
@@ -230,7 +230,7 @@
       </div>
      
     </div>
-  </div>
+   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63845ae083c0cd91137a04f3"
     type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
     crossorigin="anonymous"></script>

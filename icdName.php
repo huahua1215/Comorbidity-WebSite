@@ -52,7 +52,7 @@
     <div class="w-container">
       <h1>ICD疾病編碼</h1>
       <div class="horizontal-bar beige"></div>
-      <div class="subheading">編碼中文名稱查詢</div>
+      <div class="subheading">編碼名稱對照查詢</div>
     </div>
   </div>
   <div class="section wf-section">
